@@ -8,7 +8,7 @@ import co.usa.ciclo3.ciclo3.model.Custome;
 import co.usa.ciclo3.ciclo3.repository.crud.CustomeCrudRepository;
 
 @Repository
-        public class CustomeRepository {
+public class CustomeRepository {
     
     @Autowired
     private CustomeCrudRepository customeCrudRepository;
@@ -18,7 +18,6 @@ import co.usa.ciclo3.ciclo3.repository.crud.CustomeCrudRepository;
     }
     public Optional<Custome> getCustome(int id){
         return customeCrudRepository.findById(id);
-
     }
     public Custome save(Custome c){
         return customeCrudRepository.save(c);
