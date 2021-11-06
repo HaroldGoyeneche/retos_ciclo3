@@ -1,31 +1,42 @@
 package co.usa.ciclo3.ciclo3.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table (name ="Custome")
-public class Custome implements Serializable {
+@Table (name ="Costume")
+public class Costume implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
     private String brand;
-    private Integer model;
-    private Integer category_id;
+    private Integer year;
+    private String description;
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "categoriaId")
-    @JsonIgnoreProperties("customes")
+    @JoinColumn(name = "category")
+    @JsonIgnoreProperties("costumes")
     private Category category;
+
+    @OneToMany
+    @JsonIgnoreProperties({"costumes"})
+    public List<Message> messages;
+
+    @OneToMany
+    @JsonIgnoreProperties({"costumes"})
+    public List<Reservation> reservations;
 
     public Integer getId() {
         return id;
@@ -43,20 +54,20 @@ public class Custome implements Serializable {
         this.brand = brand;
     }
 
-    public Integer getModel() {
-        return model;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setModel(Integer model) {
-        this.model = model;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
@@ -75,7 +86,21 @@ public class Custome implements Serializable {
         this.category = category;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
 
-    
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+   
 }

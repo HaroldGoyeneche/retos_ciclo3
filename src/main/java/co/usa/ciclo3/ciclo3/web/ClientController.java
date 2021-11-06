@@ -12,33 +12,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import co.usa.ciclo3.ciclo3.model.Custome;
-import co.usa.ciclo3.ciclo3.service.CustomeService;
+
+import co.usa.ciclo3.ciclo3.model.Client;
+import co.usa.ciclo3.ciclo3.service.ClientService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api/Custome")
+@RequestMapping("/api/Client")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public class CustomeController {
+public class ClientController {
     
     @Autowired
-    private CustomeService customeService;
+    private ClientService clientService;
 
     @GetMapping("/all")
-    public List<Custome> getCustomes(){
-        return customeService.getAll();
+    public List<Client> getClients(){
+        return clientService.getAll();
     }
-    @GetMapping("/{id}")
-    public Optional<Custome> getCustome(@PathVariable("id") int id){
-        return customeService.getCustome(id);
+    @GetMapping("/{idClient}")
+    public Optional<Client> getClient(@PathVariable("idClient") int idClient){
+        return clientService.getClient(idClient);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Custome save(@RequestBody Custome c) {
-        return customeService.save(c);
+    public Client save(@RequestBody Client c) {
+        return clientService.save(c);
     }
 
 
