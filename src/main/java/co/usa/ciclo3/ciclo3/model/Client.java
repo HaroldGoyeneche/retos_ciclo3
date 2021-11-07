@@ -2,38 +2,36 @@ package co.usa.ciclo3.ciclo3.model;
 
 import java.io.Serializable;
 import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
 @Entity
-@Table(name ="Client")
+@Table(name ="client")
 public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnoreProperties("password")
     private Integer idClient;
     private String name;
     private String email;
     private String password;
     private Integer age;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
     @JsonIgnoreProperties({"client"})
-    public List<Message> messages;
+    private List<Message> messages;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
     @JsonIgnoreProperties({"client"})
-    public List<Reservation> reservations;
+    private List<Reservation> reservations;
 
     public Integer getIdClient() {
         return idClient;

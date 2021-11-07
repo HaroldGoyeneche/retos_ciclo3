@@ -8,14 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-
-
 @Entity
-@Table (name ="Message")
+@Table (name ="message")
 public class Message implements Serializable {
     
     @Id
@@ -24,14 +20,14 @@ public class Message implements Serializable {
     private String messageText;
 
     @ManyToOne
-    @JoinColumn(name = "client")
-    @JsonIgnoreProperties("message")
-    private Client client;
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties({"messages","client","reservation"})
+    private Costume costume;
 
     @ManyToOne
-    @JoinColumn(name = "costume")
-    @JsonIgnoreProperties("message")
-    private Costume costume;
+    @JoinColumn(name = "clientId")
+    @JsonIgnoreProperties({"messages","reservation","client"})
+    private Client client;
 
     public Integer getIdMessage() {
         return idMessage;
@@ -49,14 +45,6 @@ public class Message implements Serializable {
         this.messageText = messageText;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public Costume getCostume() {
         return costume;
     }
@@ -65,6 +53,15 @@ public class Message implements Serializable {
         this.costume = costume;
     }
 
-   
+    public Client getClient() {
+        return client;
+    }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+  
+    
+
+    
 }

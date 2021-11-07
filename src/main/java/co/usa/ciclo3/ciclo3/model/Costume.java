@@ -2,7 +2,7 @@ package co.usa.ciclo3.ciclo3.model;
 
 import java.io.Serializable;
 import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,17 +26,17 @@ public class Costume implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("costumes")
     private Category category;
 
-    @OneToMany
-    @JsonIgnoreProperties({"costumes"})
-    public List<Message> messages;
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "costume")
+    @JsonIgnoreProperties({"costume", "client"})
+    private List<Message> messages;
 
-    @OneToMany
-    @JsonIgnoreProperties({"costumes"})
-    public List<Reservation> reservations;
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "costume")
+    @JsonIgnoreProperties({"costume","client"})
+    private List<Reservation> reservations;
 
     public Integer getId() {
         return id;

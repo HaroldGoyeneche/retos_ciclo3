@@ -23,4 +23,8 @@ public class CostumeRepository {
         return costumeCrudRepository.save(c);
     }
 
+    public void delete(Costume c){
+        costumeCrudRepository.delete(c);
+    }
+
 }

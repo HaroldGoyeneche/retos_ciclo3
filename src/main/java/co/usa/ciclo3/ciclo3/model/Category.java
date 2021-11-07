@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name ="Category")
+@Table(name ="category")
 public class Category implements Serializable {
     
     @Id
@@ -22,8 +22,8 @@ public class Category implements Serializable {
     private String description;
     
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "category")
-    @JsonIgnoreProperties({"category"})
-    public List<Costume> customes;
+    @JsonIgnoreProperties("category")
+    private List<Costume> costumes;
 
     public Integer getId() {
         return id;
@@ -49,13 +49,12 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public List<Costume> getCustomes() {
-        return customes;
+    public List<Costume> getCostumes() {
+        return costumes;
     }
 
-    public void setCustomes(List<Costume> customes) {
-        this.customes = customes;
+    public void setCostumes(List<Costume> costumes) {
+        this.costumes = costumes;
     }
-
 
 }
